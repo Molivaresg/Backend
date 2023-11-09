@@ -1,17 +1,24 @@
 package com.springboot.backend;
 
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BocinaServiceImpl implements BocinaService {
+    private final BocinaRepository bocinaRepository;
 
     @Autowired
-    private BocinaRepository bocinaRepository;
+    public BocinaServiceImpl(BocinaRepository bocinaRepository) {
+        this.bocinaRepository = bocinaRepository;
+    }
+
+    @Override
+    public Bocina crearBocina(Bocina bocina) {
+        return bocinaRepository.save(bocina);
+    }
 
     @Override
     public List<Bocina> obtenerTodasLasBocinas() {
@@ -19,8 +26,13 @@ public class BocinaServiceImpl implements BocinaService {
     }
 
     @Override
-    public Bocina obtenerBocinaPorId(Long id) {
-        return bocinaRepository.findById(id).orElse(null);
+    public Optional<Bocina> obtenerBocinaPorId(Long id) {
+        return bocinaRepository.findById(id);
+    }
+
+    @Override
+    public void eliminarBocina(Long id) {
+        bocinaRepository.deleteById(id);
     }
 }
 

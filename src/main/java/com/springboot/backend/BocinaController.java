@@ -1,27 +1,44 @@
 package com.springboot.backend;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/bocinas")
 public class BocinaController {
+    private final BocinaService bocinaService;
 
     @Autowired
-    private BocinaService bocinaService;
+    public BocinaController(BocinaService bocinaService) {
+        this.bocinaService = bocinaService;
+    }
 
-    @GetMapping("/")
+    // Crear una bocina
+    @PostMapping
+    public Bocina crearBocina(@RequestBody Bocina bocina) {
+        return bocinaService.crearBocina(bocina);
+    }
+
+    // Obtener todas las bocinas
+    @GetMapping
     public List<Bocina> obtenerTodasLasBocinas() {
         return bocinaService.obtenerTodasLasBocinas();
     }
 
+    // Obtener una bocina por su ID
     @GetMapping("/{id}")
-    public Bocina obtenerBocinaPorId(@PathVariable Long id) {
+    public Optional<Bocina> obtenerBocinaPorId(@PathVariable Long id) {
         return bocinaService.obtenerBocinaPorId(id);
     }
+
+    // Eliminar una bocina por su ID
+    @DeleteMapping("/{id}")
+    public void eliminarBocina(@PathVariable Long id) {
+        bocinaService.eliminarBocina(id);
+    }
 }
+
+
