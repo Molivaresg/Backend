@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: service.zuul
+server:
+  port: 8090
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+zuul:
+  routes:
+    store:
+      service-id: service.speaker.store
+      path: /api/store/**
+    bocinas:
+      service-id: service.bocina
+      path: /api/bocina/**
