@@ -1,0 +1,2 @@
+INSERT INTO  user (username, password, enabled, nombre, apellido, email) VALUES ('Carl_43', '2086325', 1, 'Carlos', 'Galindo', 'carlos43@hotmail.com');
+INSERT INTO  user (username, password, enabled, nombre, apellido, email) VALUES ('FrankiSan', '2023215', 1, 'Francisco', 'Sanchez', 'frankiSan567@hotmail.com');
